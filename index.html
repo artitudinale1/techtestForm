@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- JS -->
+    <script src="js/angular.min.js"></script>
+
+        <script type="text/javascript">
+            // create angular app
+            var validationApp = angular.module('validationApp', []);
+
+            // create angular controller
+            validationApp.controller('mainController', function($scope) {
+
+            //set scope variable to retrive gender value from radio buttons
+            $scope.user = {
+
+                  selectedGender: 1
+
+
+                }
+            //and set my JS array of Objs with gender values
+                $scope.gender = [{
+                  'name': 'Male',
+                  'id': 1
+                }, {
+                  'name': 'Female',
+                  'id': 2
+                }];
+            //set variable to control if form has been submitted or not
+            $scope.submitted = false;
+            //set variable to control if we are good to show the results of the form
+            $scope.results = false
+                
+
+            $scope.submitForm = function() {
+                // check to make sure the form is completely valid
+                if (!$scope.userForm.$invalid ) {
+                 // we are good to show results so true       
+                     $scope.results = true
+                }
+                else {
+                     $scope.submitted = true;
+                }
+
+            };
+
+            });
+        </script>
+
+<!-- LITTLE STYLE FOR ERRORS FORM -->
+<style type="text/css"> 
+.error{color: red}
+</style>
+</head>
+
+<body ng-app="validationApp" ng-controller="mainController">
+    <div class="container">
+    
+    <!-- PAGE HEADER -->
+        <div class="page-header"><h2>Alex Garulli - Form</h2></div>
+
+        <div id="r" class=" animate-show" ng-show="results">
+            <p><label>Name</label>  {{ name }}</p>
+            <p ><label>Surname</label>  {{ surname }}</p>
+            <p ><label>Email</label>  {{ email }}</p>
+            <p ><label>Gender</label>  {{user.selectedGender }}</p>
+            <p ><label>Topic</label>  {{ topic }}</p>
+            <p ><label>Message</label>  {{ message }}</p>
+        </div>
+
+   
+
+    <!-- FORM -->
+  
+    <form name="userForm" ng-submit="submitForm()" novalidate class=" animate-show" ng-show="!results">
+        <!-- NAME -->
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" ng-model="name" required>
+     
+        <div class="error" ng-show="userForm.$invalid && submitted ">
+                <small class="error" ng-show="userForm.name.$error.required">
+                   Your name is required.
+                </small>
+        </div>
+        </div>
+        
+        <!-- SURNAME -->
+        <div class="form-group">
+            <label>Surname</label>
+            <input type="text" name="surname" class="form-control" ng-model="surname" required>
+            
+        <div class="error" ng-show="userForm.$invalid && submitted ">
+                <small class="error" ng-show="userForm.surname.$error.required">
+                   Your surname is required.
+                </small>
+        </div>
+        </div>
+
+
+              <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="email" placeholder="Your email" required>
+            <!--this need to be out of userForm.$invalid && submitted so we use the instant email validation Angular gave us -->
+             <small class="error" ng-show="userForm.email.$error.email">
+                   That is not a valid email. Please input a valid email.
+            </small>
+            
+        <div class="error" ng-show="userForm.$invalid && submitted ">
+                <small class="error" ng-show="userForm.email.$error.required">
+                   Your email is required.
+                </small>
+        </div>
+        </div>
+
+        <!-- GENDER -->
+      <div class="form-group" ng-repeat="g in gender">
+            <input type="radio" ng-model="user.selectedGender" name="radiob" id="{{g.id}}" value="{{g.name}}" required  /> {{g.name}}
+           
+      </div>
+      <div class="error" ng-show="userForm.$invalid && submitted">
+            <small class="error" ng-show="user.selectedGender == 1"> <!--to validate radio buttons I gave my model a value and I'm checking if that s changing -->
+                   Your gender is required.
+            </small>
+      </div>
+
+         <!-- SELECT -->
+        <div  class="form-group">
+            <label>Topic</label>
+           <select required class="form-control" ng-model="topic" name="topic">
+                 <option value="volvo">Volvo</option>
+                  <option value="saab">Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+            </select>
+       </div>
+        <div class="error" ng-show="userForm.$invalid && submitted">
+            <small class="error" ng-show="userForm.topic.$error.required">
+                   A topic is required.
+            </small>
+        </div>
+
+         <!-- MESSAGE -->
+        <div class="form-group">
+            <label>Message</label>
+             <textarea rows="4" cols="50" class="form-control" ng-model="message" name="message" required> </textarea>
+        </div>
+               <div class="error" ng-show="userForm.$invalid && submitted">
+            <small class="error" ng-show="userForm.message.$error.required">
+                   A message is required.
+            </small>
+          </div>
+
+           <!-- CHECKBOX -->
+        <div class="form-group">
+            <label> Tems &amp; Conditions</label>
+                <br/>
+                <input type="checkbox" ng-checked="model=='a'" ng-model="user.agree" ng-click="model='a'" required name="agree"> agree
+                <input type="checkbox" ng-checked="model=='b'" ng-click="model='b'" ng-model="user.notagree"  > not agree
+        </div>
+         <div class="error" ng-show="userForm.$invalid && submitted">
+            <small class="error" ng-show="userForm.agree.$error.required">
+                   You must accept terms and condition
+            </small>
+        </div>
+        
+        <button type="submit"  class="btn btn-primary" ng-model="results"  >Submit</button>
+        
+    </form>
+
+</body>
+</html>
