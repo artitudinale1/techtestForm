@@ -1,4 +1,4 @@
-#<b>Technical Test - Create Validated Form.#</b>
+#<b>Technical Test - Create Validated Form.</b>#
 
 ##<b>BRIEF/BACKGOUND PROJECT</b>##
 
