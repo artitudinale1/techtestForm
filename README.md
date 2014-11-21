@@ -35,4 +35,6 @@ HTML5, CSS, AngularJS and Bootsrap.
 
   - Check behave of disclame check-box and evenually fix it
   - Cross-browser testing
-   
+  
+
+<b>PLESE IF YOU EXPERIMENT ANY BUGS/ERRORS/PROBLEMS TESTiNG OR CHECKING OUT THIS PROJECT</b> report it though GITHUB or @ alex.garulli@gmail.com
