@@ -1,6 +1,6 @@
 #<b>Technical Test - Create Validated Form.</b>#
 
-##<b>BRIEF/BACKGOUND PROJECT</b>##
+##<b>BRIEF/BACKGROUND PROJECT</b>##
 
 This is a technical test I took as part of the recruiment process for an Digital Healcare Company based in London.
 The test had two part : creation of a validated form and a creative part I stored in this other repo. https://github.com/artitudinale1/techtestcreative 
